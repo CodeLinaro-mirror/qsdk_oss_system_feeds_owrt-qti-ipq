@@ -1,1 +1,1 @@
-QTIIPQ:=
+QTIIPQ:=wlan-iw
