@@ -10,6 +10,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=wlan-iw
 PKG_VERSION:=5.16
 PKG_RELEASE:=1
+PKG_LICENSE:=ISC
 
 PKG_SOURCE:=iw-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://www.kernel.org/pub/software/network/iw
