@@ -1,1 +1,1 @@
-QTIIPQ:=kmod-qca-cnss
+QTIIPQ:=kmod-qca-cnss wlan-iw
