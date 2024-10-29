@@ -70,16 +70,13 @@ create_cfg_caldata() {
 
 	awk -F ',' -v apdk='/tmp/' -v mtdblock=$1 -v ahb_dir=$2 -v pci_dir=$3 -v pci1_dir=$4 -v board=$brd -v fw_path=$fw_caldata -v lib_fw="$lib_fw" '{
 		if ($1 == board) {
-			print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6
                         file_suffix=$6+1
 			BDF_SIZE=0
 			if ($6 == 255) {
-				print "Internal radio"
 				cmd ="stat -Lc%s " lib_fw "/" ahb_dir "/bdwlan.b" $2 " 2> /dev/null"
 				cmd | getline BDF_SIZE
 				close(cmd)
 				if(!BDF_SIZE) {
-					print "BDF file for Board id " $2 " not found. Using default value"
 					BDF_SIZE=131072
 				}
 				cmd = "dd if="mtdblock" of=" apdk ahb_dir "/caldata.bin bs=1 count=" BDF_SIZE " skip=" $4
@@ -87,22 +84,17 @@ create_cfg_caldata() {
 				cmd = "cp " apdk ahb_dir "/caldata.bin " fw_path "/" ahb_dir "/"
 				system(cmd)
 			} else {
-				print "PCI radio"
 				dir_lib=pci_dir
 				if ($3 == 2){
-					print "Inside slot instance 2"
 					if (pci1_dir != 0) {
 						dir_lib=pci1_dir
 			}
 				}
 				cmd ="" lib_fw "/" dir_lib "/bdwlan.b" $2 " 2> /dev/null"
-				print "BDF path " cmd" "
 				cmd | getline BDF_SIZE
 				BDF_SIZE = "204800"
 				close(cmd)
-				print "BDF Size " BDF_SIZE
 				if(!BDF_SIZE) {
-					print "BDF file for Board id " $2 " not found. Using default value"
 					if (dir_lib == "qcn9224")
 						BDF_SIZE=184320
 					#Adding additional condition check for pebble wideband case
@@ -117,7 +109,7 @@ create_cfg_caldata() {
 				system(cmd)
 			}
 		}
-	}' /lib/firmware/ftm.conf
+	}' /data/vendor/wifi/caldata/ftm.conf
 
     case "$brd" in
     ap-sdxpinn*)
