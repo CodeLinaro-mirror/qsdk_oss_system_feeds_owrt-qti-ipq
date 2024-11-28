@@ -15,50 +15,7 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-get_config_file_path()
-{
-    local file_type brd_name board
-    local ini_path
-    local caldata_path
-
-    if [[ $# -ne 1 ]]; then
-        return
-    fi
-
-    file_type="$1"
-
-    case "$file_type" in
-    ini|caldata) ;;
-    *) return ;;
-    esac
-
-    [ -f /tmp/sysinfo/board_name ] && {
-	board=ap$(echo $(board_name) | awk -F 'ap' '{print$2}')
-        echo "Board name is $board" > /dev/console
-    }
-
-    case "$board" in
-    ap-sdxlemur* | *sdxpinn*)
-        ini_path="/etc/misc/ipq/ini"
-        caldata_path="/data/vendor/wifi/caldata"
-    ;;
-    *)
-        ini_path="/ini"
-        caldata_path="/lib/firmware"
-    ;;
-    esac
-    echo "INI path is $ini_path" > /dev/console
-    echo "Caldata path is $caldata_path" > /dev/console
-
-    case "$file_type" in
-    ini)
-        echo "$ini_path"
-    ;;
-    caldata)
-        echo "$caldata_path"
-    ;;
-    esac
-}
+. /lib/wifi/wifi-utils.sh
 
 create_cfg_caldata() {
     local brd=ap$(echo $(board_name) | awk -F 'ap' '{print$2}')
