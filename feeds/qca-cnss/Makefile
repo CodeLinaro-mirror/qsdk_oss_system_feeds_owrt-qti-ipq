@@ -69,6 +69,10 @@ define KernelPackage/$(PKG_NAME)-stream
 	FILES:=$(PKG_BUILD_DIR)/ipq_cnss2_stream.ko
 endef
 
+ifeq ($(strip ${CONFIG_LINUX_6_1}${CONFIG_LINUX_6_6}),y)
+DRV_MAKE_OPTS+=QCA_CNSS_LINUX_6_x_SUPPORT=y
+endif
+
 define KernelPackage/$(PKG_NAME)/Description
 	This package contains CNSS stream Platform Driver for QTI WLAN Chipsets
 endef
@@ -83,6 +87,9 @@ DRV_MAKE_OPTS+=CONFIG_CNSS_OUT_OF_TREE=y
 DRV_MAKE_OPTS+=CONFIG_BUILD_OWRT=y
 ifeq ($(CONFIG_TARGET_sdx75), y)
 DRV_MAKE_OPTS+=CONFIG_TARGET_SDX75=y
+endif
+ifeq ($(CONFIG_TARGET_sdx85), y)
+DRV_MAKE_OPTS+=CONFIG_TARGET_SDX85=y
 endif
 
 define Build/Compile
