@@ -22,7 +22,7 @@ PKG_CPE_ID:=cpe:/a:kernel:iw
 
 PKG_BUILD_FLAGS:=gc-sections lto
 PKG_BUILD_DIR=$(BUILD_DIR)/iw-$(PKG_VERSION)
-PKG_PATCH_DIR:=${TOPDIR}/owrt-qti-ipq/feeds/wlan-iw/priv_patches
+PKG_PATCH_DIR:=${TOPDIR}/owrt-qti-ipq/feeds/wlan-iw/priv_patches/patches
 
 include $(INCLUDE_DIR)/package.mk
 
