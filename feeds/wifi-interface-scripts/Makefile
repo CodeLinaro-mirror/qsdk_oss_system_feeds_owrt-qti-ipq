@@ -4,6 +4,7 @@ include $(TOPDIR)/rules.mk
 PKG:=qca-wifi-scripts
 PKG_NAME:=$(PKG)
 PKG_VERSION:=1
+PKG_LICENSE:=GPL-2.0
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG)
 
@@ -15,7 +16,7 @@ define Package/$(PKG_NAME)
   URL:=http://www.qca.qualcomm.com
   MAINTAINER:=Qualcomm Atheros
   TITLE:= QCA wifi scripts for kernel5.4
-  DEPENDS:=@TARGET_ipq810x||TARGET_ipq50xx||TARGET_ipq60xx||TARGET_ipq95xx||TARGET_ipq53xx||TARGET_ipq54xx||TARGET_sdx75
+  DEPENDS:=@TARGET_ipq810x||TARGET_ipq50xx||TARGET_ipq60xx||TARGET_ipq95xx||TARGET_ipq53xx||TARGET_ipq54xx||TARGET_sdx75||TARGET_sdx85
 endef
 
 
@@ -29,6 +30,8 @@ else
 endif
 	$(INSTALL_DATA) ./files/create_cfg_caldata.sh $(1)/lib/
 	$(INSTALL_DATA) ./files/wifi_interface_helper.sh $(1)/lib
+	$(INSTALL_DIR) $(1)/data/vendor/wifi/caldata
+	$(INSTALL_BIN) ./files/ftm.conf $(1)/data/vendor/wifi/caldata/ftm.conf
 ifneq ($(CONFIG_TARGET_sdx75),y)
 	$(INSTALL_DATA) ./files/update_smp_affinity.sh $(1)/lib
 endif
