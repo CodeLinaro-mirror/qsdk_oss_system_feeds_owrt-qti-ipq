@@ -405,7 +405,7 @@ do_load_ipq4019_board_bin()
                     mkdir -p ${apdk}/IPQ5332
                     create_cfg_caldata "${mtdblock}" "IPQ5332"
             ;;
-            sdxpinn-qcn9224-V1|sdxkova-qcn9224*)
+            sdxpinn-qcn9224-V1|sdxkova-qcn9224-V1*)
 	            [ -f /data/vendor/wifi/caldata/qcn9224/caldata_1.b0002 ] && \
 	            [ -f /data/vendor/wifi/caldata/qcn9224/caldata_2.b0004 ] && \
 	            [ -f /data/vendor/wifi/caldata/qcn9224/caldata_3.b0001 ] && \
@@ -414,7 +414,7 @@ do_load_ipq4019_board_bin()
 
                     create_cfg_caldata "${mtdblock}" "" "qcn9224" "0"
             ;;
-            sdxpinn-qcn9224-V2)
+            sdxpinn-qcn9224-V2|sdxkova-qcn9224-V2*)
 	            [ -f /data/vendor/wifi/caldata/qcn9224/caldata_1.b1003 ] && \
 	            [ -f /data/vendor/wifi/caldata/qcn9224/caldata_2.b0004 ] && \
                     return
